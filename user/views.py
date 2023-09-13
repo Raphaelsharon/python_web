@@ -125,7 +125,7 @@ class AdminView(APIView):
             
             return Response(serializer.data)
         
-    def patch(self, request, id = None):
+    def patch(self, request, id):
         
         user  = self.get_object(id, tipo = "client")
         serializer = userSerializer(user, data = request.data,  partial = True)
@@ -133,6 +133,6 @@ class AdminView(APIView):
         if serializer.is_vallid():
             serializer.save()
             
-            serializer = userSerializer(serializer.data)
+            serializer = userListeSerializer(serializer.data)
             return Response(serializer.data, status = 200)
         return Response(serializer.errors, status = 400)
