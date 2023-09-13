@@ -7,7 +7,6 @@ from .models import userModels
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.permissions import IsAuthenticated
 from .middlewares import Middlewares
 from .permissions import ValidToken, ValidAdmin
 from django.contrib.auth.hashers import make_password
@@ -25,10 +24,12 @@ class CustomTokenobtainPairView(TokenObtainPairView): #  constonisar token e per
 
 class LogoutView(APIView):
     
-    permission_classes = (IsAuthenticated,)
+    permission_classes = [ValidToken]
+    
     queryset = userModels.objects.all()                
     
     def post(self, resquest):
+        
         refresh_token = resquest.data.get('refresh_token')
         
         if refresh_token:

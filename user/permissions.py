@@ -13,8 +13,9 @@ def validate_token(token):
         
     try:
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms = ['HS256'])
-        print(payload)
         user = userModels.objects.filter(id=payload['user_id']).first()
+        print(user)
+        
             
         if not user:
             return False
@@ -35,6 +36,7 @@ class ValidToken(permissions.BasePermission):
         
         token = request.headers.get('token')
         user = validate_token(token)
+        print(user)
         
         if not user:
             return False
@@ -49,9 +51,11 @@ class ValidAdmin(permissions.BasePermission):
         
         try:
             
-            token = resquet.heades.get('token')
-            payload = jwt.decode(token, settings.SECRET_KET, algorithms = ['HS256'])
+            token = resquet.headers.get('token')
+            payload = jwt.decode(token, settings.SECRET_KEY, algorithms = ['HS256'])
             user = userModels.objects.filter(id= payload['user_id'], tipo= "root").first()
+            print("teste")
+            print(user)
             
             if not user: 
                 return False

@@ -3,7 +3,7 @@ from uuid import uuid4
 from user.models import userModels 
 # Create your models here.
 
-class tarefaModels(models.Model):
+class TarefaModels(models.Model):
     
     id = models.UUIDField(primary_key= True, default = uuid4, editable = False)
     user = models.ForeignKey(userModels, on_delete = models.CASCADE, related_name = "tarefa")
