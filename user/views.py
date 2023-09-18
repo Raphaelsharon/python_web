@@ -20,7 +20,7 @@ class CreateUserView(generics.CreateAPIView): #  criar usuario
 
 class CustomTokenobtainPairView(TokenObtainPairView): #  constonisar token e permitir que ele faça o login
     
-    sarializer_class = CustomTonkenObtationParirSerializer
+    serializer_class = CustomTonkenObtationParirSerializer
 
 class LogoutView(APIView):
     
