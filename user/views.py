@@ -130,9 +130,9 @@ class AdminView(APIView):
         user  = self.get_object(id, tipo = "client")
         serializer = userSerializer(user, data = request.data,  partial = True)
         
-        if serializer.is_vallid():
+        if serializer.is_valid():
             serializer.save()
             
-            serializer = userListeSerializer(serializer.data)
+            serializer = userUpdateSerializer(serializer.data)
             return Response(serializer.data, status = 200)
         return Response(serializer.errors, status = 400)
